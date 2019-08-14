@@ -6,7 +6,7 @@ class Product(models.Model):
     product_title = models.TextField()
     product_description = models.TextField(blank=True)
 
-class MyShopTags(models.Model):
+class ShopTags(models.Model):
     tag_key = models.CharField(max_length=100)
     tag_valuee = models.CharField(max_length=100)
 
@@ -16,11 +16,15 @@ class MyShopTags(models.Model):
     def __str__(self):
         return self.tag_key
 
-class MyShops(models.Model):
+class Shops(models.Model):
     shop_id = models.AutoField(primary_key=True)
     shop_url = models.TextField()
     shop_card_tags = models.ArrayModelField(
-        model_container = MyShopTags,
+        model_container = ShopTags,
     )
+
+class Category(models.Model):
+    category_id = models.AutoField(primary_key=True)
+    category_value = models.TextField()
 
     
