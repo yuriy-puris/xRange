@@ -6,7 +6,7 @@ from .serializers import CategorySerializer
 
 from .services import CategoryParser
 
-url = 'https://elmir.ua/'
+url = 'https://www.moyo.ua'
 
 class CategoryViewSet(viewsets.ModelViewSet):
   queryset = Category.objects.all()

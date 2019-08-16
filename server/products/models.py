@@ -4,7 +4,8 @@ class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
     product_shop_id = models.IntegerField()
     product_title = models.TextField()
-    product_description = models.TextField(blank=True)
+    product_description = models.TextField(blank=True)    
+
 
 class ShopTags(models.Model):
     tag_key = models.CharField(max_length=100)
@@ -26,5 +27,3 @@ class Shops(models.Model):
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
     category_value = models.TextField()
-
-    
