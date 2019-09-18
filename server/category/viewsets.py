@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from .models import Category
+from .models import CategoryMoyo
 from shops.models import Shops
 
 from .serializers import CategorySerializer
@@ -14,7 +14,7 @@ def get_shop():
     category = CategoryParser().get_category(eldorado.shop_url)
 
 class CategoryViewSet(viewsets.ModelViewSet):
-  queryset = Category.objects.all()
+  queryset = CategoryMoyo.objects.all()
   serializer_class = CategorySerializer
-
+  
   category = get_shop()

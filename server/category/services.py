@@ -24,7 +24,8 @@ headers = {
 
 class CategoryParser:
     def __init__(self):
-      category_list = []
+      self.root = []
+      self.category = {}
 
     def get_html(self, url):
       response = requests.get(url, headers=headers['shop_id_2'])
@@ -38,25 +39,14 @@ class CategoryParser:
       soup = BeautifulSoup(html, 'lxml')
       menu = soup.find(id='menu')
       nav = menu.find('ul', class_='lvl1')
-      self.parser_navigation(nav)
-
-    def parser_navigation(self, nav):
-      for point in nav:
-        point_root = {}
-        text = point.find(class_='menu-item-lvl1').find('span').text
-        # point_root.id = key
-        point_root['text'] = text
-        children = point.find(class_='lvl2')
-
-        if children:
-          children = {}
-          point_root['children'] = []
-          for child in children:
-            children_text = child.find(class_='menu-item-lvl2').find('span').text
-            # children_root.id = child_key
-            children_root.text = children_text
-            point_root.children.append(children)
-
-        self.category_list.append(point_root)  
-      
-      print(self.category_list)
+      list_category = { 'nav': nav }
+      self.deep_parser(list_category)
+    
+    # apple category (temporary)
+    def deep_parser(self, list_category):
+      # level 1
+      collection = list_category['nav'].findChildren()
+      print(collection)
+      deep_collection = collection[0].find_all('a', class_='menu-item-lvl2')
+      for item in deep_collection:
+        print('test', item.get('href'))
