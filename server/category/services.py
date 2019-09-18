@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from lxml import html
 import lxml.etree
 
-from .models import Category
+from .models import CategoryMoyo
 
 headers = {
   'shop_id_1': {
@@ -44,9 +44,13 @@ class CategoryParser:
     
     # apple category (temporary)
     def deep_parser(self, list_category):
-      # level 1
-      collection = list_category['nav'].findChildren()
-      print(collection)
-      deep_collection = collection[0].find_all('a', class_='menu-item-lvl2')
+      collection = list_category['nav'].findChild(recursive=False)
+      deep_collection = collection.find_all('a', class_='menu-item-lvl3')
+      # print(deep_collection)
       for item in deep_collection:
-        print('test', item.get('href'))
+        # item_info = {
+        #   'text': item.getText(),
+        #   'href': item.get('href')
+        # }
+        category = CategoryMoyo(category_value=item.getText(),category_url=item.get('href'))
+        category.save()
