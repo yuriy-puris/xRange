@@ -48,9 +48,5 @@ class CategoryParser:
       deep_collection = collection.find_all('a', class_='menu-item-lvl3')
       # print(deep_collection)
       for item in deep_collection:
-        # item_info = {
-        #   'text': item.getText(),
-        #   'href': item.get('href')
-        # }
         category = CategoryMoyo(category_value=item.getText(),category_url=item.get('href'))
         category.save()
